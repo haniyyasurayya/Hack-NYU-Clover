@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interest Pop-up Quiz 1</title>
+	<style>
+h1 {
+  font-family: "Heebo Light", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 40px 40px; /* Adjust padding as needed */
+  border-radius: 5px;
+  width: auto; /* Set width to adjust dynamically */
+  z-index: 1;
+}
+
+@media only screen and (min-height: 800px) {
+  h1 {
+    bottom: 0;
+    top: auto;
+  }
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #CDD5CA;
+  padding: 20px 40px; /* Adjust padding as needed */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  width: auto; /* Set width to adjust dynamically */
+  z-index: 1;
+  font-family: "Heebo Light", sans-serif;
+    height: 200px; /* Add a fixed height */
+  overflow: auto; /* Make the popup scrollable */
+}
+		#popup h2 {
+		    margin-bottom: 15px;
+		}
+		#popup p {
+		    margin-bottom: 10px;
+		}
+		#popup label {
+		    margin-top: 5px;
+		    margin-bottom: 10px;
+		}
+		#popup button {
+		    margin-top: 5px;
+		}
+		#button-container {
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: row-reverse;
+		}
+	</style>
+</head>
+<body>
+  <h1><center>Scroll to test your knowledge!</center></h1>
+
+	<!-- Add some content to make the page scrollable -->
+	<div style="height: 1000px"></div>
+
+	<div id="popup">
+		<h2><center>INTEREST</center></h2>
+		<p><center>Which of the following would be the best investment decision?</center></p>
+		<form>
+			<input type="radio" id="borrow" name="decision" value="borrow">
+			<label for="borrow">Borrow money that has a high interest rate</label><br>
+			<input type="radio" id="wait" name="decision" value="wait">
+			<label for="wait">Wait ten years before investing so you have more money to invest</label><br>
+			<input type="radio" id="low" name="decision" value="low">
+			<label for="low">Investing in a stock that with a low interest rate</label><br>
+			<input type="radio" id="high" name="decision" value="high">
+			<label for="high">Investing in a stock that has a high interest rate now</label><br>
+			<button type="button" onclick="checkAnswer()">Submit</button>
+					<button type="button" onclick="hidePopup()">Close</button>
+		</form>
+		<p id="result"></p>
+	</div>
+
+	<script>
+		// Set up variables
+		var popup = document.getElementById("popup");
+		var result = document.getElementById("result");
+
+		// Function to show the popup
+		function showPopup() {
+			popup.style.display = "block";
+		}
+
+		// Function to hide the popup
+		function hidePopup() {
+			popup.style.display = "none";
+		}
+
+		// Function to check the user's answer
+		function checkAnswer() {
+			var answer = document.querySelector('input[name="decision"]:checked');
+			if (answer && answer.value === "high") {
+				result.innerHTML = "Correct!";
+			} else {
+				result.innerHTML = "Incorrect. Borrowing money at a high interest rate can generate a lot of debt quickly, forcing you to pay back much more than what you borrowed. Waiting ten years before investing could cause you to lose out on a lot of interest that could have been earned throughout those ten years. Investing in stocks that have low interest rates might be safe, but would not generate as much interest return as a high-interest stock.";
+			}
+		}
+
+		// Show the popup when the user scrolls down
+		var lastScrollPosition = window.scrollY;
+		window.addEventListener("scroll", function() {
+			var currentScrollPosition = window.scrollY;
+			var scrollDifference = currentScrollPosition - lastScrollPosition;
+			if (scrollDifference > 0 && currentScrollPosition > 500 && currentScrollPosition < 800) {
+				showPopup();
+			} else if (scrollDifference < 0 && currentScrollPosition < 500 || currentScrollPosition > 800 || currentScrollPosition >= document.documentElement.scrollHeight - window.innerHeight) {
+				hidePopup();
+			}
+			lastScrollPosition = currentScrollPosition;
+		});
+	</script>
+</body>
+</html> 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Budgeting Pop-up Quiz 2</title>
+	<style>
+		#popup {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+			max-width: 1000px;
+			z-index: 1;
+            font-family: "Heebo Light", sans-serif;
+		}
+		#popup h2 {
+		    margin-bottom: 15px;
+		}
+		#popup p {
+		    margin-bottom: 10px;
+		}
+		#popup label {
+		    margin-top: 5px;
+		    margin-bottom: 10px;
+		}
+		#popup button {
+		    margin-top: 5px;
+		}
+		#button-container {
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: row-reverse;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome to my website</h1>
+	<p>Scroll up and down to take the quiz!</p>
+
+	<!-- Add some content to make the page scrollable -->
+	<div style="height: 1000px"></div>
+
+	<div id="popup">
+		<h2><center>BUDGETING</center></h2>
+		<p><center>Which of the following is the best budgeting habit?</center></p>
+		<form>
+			<input type="radio" id="spend" name="habit" value="spend">
+			<label for="spend">Spending your entire paycheck the day after</label><br>
+			<input type="radio" id="allocate" name="habit" value="allocate">
+			<label for="allocate">Allocating your paycheck for bills, living expenses, and disposable income</label><br>
+			<input type="radio" id="review" name="habit" value="review">
+			<label for="review">Review what you already spent your money on at the end of each month</label><br>
+			<button type="button" onclick="checkAnswer()">Submit</button>
+					<button type="button" onclick="hidePopup()">Close</button>
+		</form>
+		<p id="result"></p>
+	</div>
+
+	<script>
+		// Set up variables
+		var popup = document.getElementById("popup");
+		var result = document.getElementById("result");
+
+		// Function to show the popup
+		function showPopup() {
+			popup.style.display = "block";
+		}
+
+		// Function to hide the popup
+		function hidePopup() {
+			popup.style.display = "none";
+		}
+
+		// Function to check the user's answer
+		function checkAnswer() {
+			var answer = document.querySelector('input[name="habit"]:checked');
+			if (answer && answer.value === "allocate") {
+				result.innerHTML = "Correct!";
+			} else {
+				result.innerHTML = "Incorrect. Spending your entire paycheck the day after doesn’t allow for emergency funds that may be necessary when bills or expenses pop up all of a sudden. Reviewing what you already spent your money on at the end of the month only allows you to see how you allocated your money, but it didn’t help you avoid unnecessary spending. Allocating your paycheck before spending lets you set defined boundaries on where and how much to spend your money.";
+			}
+		}
+
+		// Show the popup when the user scrolls down
+		var lastScrollPosition = window.scrollY;
+		window.addEventListener("scroll", function() {
+			var currentScrollPosition = window.scrollY;
+			var scrollDifference = currentScrollPosition - lastScrollPosition;
+			if (scrollDifference > 0 && currentScrollPosition > 500 && currentScrollPosition < 800) {
+				showPopup();
+			} else if (scrollDifference < 0 && currentScrollPosition < 500 || currentScrollPosition > 800 || currentScrollPosition >= document.documentElement.scrollHeight - window.innerHeight) {
+				hidePopup();
+			}
+			lastScrollPosition = currentScrollPosition;
+		});
+	</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Identity Theft Pop-up Quiz 3</title>
+	<style>
+		#popup {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+			max-width: 1000px;
+			z-index: 1;
+            font-family: "Heebo Light", sans-serif;
+		}
+		#popup h2 {
+		    margin-bottom: 15px;
+		}
+		#popup p {
+		    margin-bottom: 10px;
+		}
+		#popup label {
+		    margin-top: 5px;
+		    margin-bottom: 10px;
+		}
+		#popup button {
+		    margin-top: 5px;
+		}
+		#button-container {
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: row-reverse;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome to my website</h1>
+	<p>Scroll up and down to take the quiz!</p>
+
+	<!-- Add some content to make the page scrollable -->
+	<div style="height: 1000px"></div>
+
+	<div id="popup">
+		<h2><center>IDENTITY THEFT</center></h2>
+		<p><center>How can you protect yourself from identity theft?</center></p>
+		<form>
+			<input type="radio" id="scam" name="protection" value="scam">
+			<label for="scam">Watch out for phishing scams such as suspicious texts or phone calls asking for your account information</label><br>
+			<input type="radio" id="wifi" name="protection" value="wifi">
+			<label for="wifi">Access private bank information while on public WiFi</label><br>
+			<input type="radio" id="password" name="protection" value="password">
+			<label for="password">Use the same password for multiple accounts</label><br>
+			<input type="radio" id="card" name="protection" value="card">
+			<label for="card">Leave your credit card out in public</label><br>
+			<button type="button" onclick="checkAnswer()">Submit</button>
+					<button type="button" onclick="hidePopup()">Close</button>
+		</form>
+		<p id="result"></p>
+	</div>
+
+	<script>
+		// Set up variables
+		var popup = document.getElementById("popup");
+		var result = document.getElementById("result");
+
+		// Function to show the popup
+		function showPopup() {
+			popup.style.display = "block";
+		}
+
+		// Function to hide the popup
+		function hidePopup() {
+			popup.style.display = "none";
+		}
+
+		// Function to check the user's answer
+		function checkAnswer() {
+			var answer = document.querySelector('input[name="protection"]:checked');
+			if (answer && answer.value === "scam") {
+				result.innerHTML = "Correct!";
+			} else {
+				result.innerHTML = "Incorrect. Accessing private bank information while on public WiFi, using the same password for multiple accounts, and leaving your credit card out in public increases the chance of your information being stolen in public.";
+			}
+		}
+
+		// Show the popup when the user scrolls down
+		var lastScrollPosition = window.scrollY;
+		window.addEventListener("scroll", function() {
+			var currentScrollPosition = window.scrollY;
+			var scrollDifference = currentScrollPosition - lastScrollPosition;
+			if (scrollDifference > 0 && currentScrollPosition > 500 && currentScrollPosition < 800) {
+				showPopup();
+			} else if (scrollDifference < 0 && currentScrollPosition < 500 || currentScrollPosition > 800 || currentScrollPosition >= document.documentElement.scrollHeight - window.innerHeight) {
+				hidePopup();
+			}
+			lastScrollPosition = currentScrollPosition;
+		});
+	</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stocks Pop-up Quiz 4</title>
+	<style>
+		#popup {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+			max-width: 1000px;
+			z-index: 1;
+            font-family: "Heebo Light", sans-serif;
+		}
+		#popup h2 {
+		    margin-bottom: 15px;
+		}
+		#popup p {
+		    margin-bottom: 10px;
+		}
+		#popup label {
+		    margin-top: 5px;
+		    margin-bottom: 10px;
+		}
+		#popup button {
+		    margin-top: 5px;
+		}
+		#button-container {
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: row-reverse;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome to my website</h1>
+	<p>Scroll up and down to take the quiz!</p>
+
+	<!-- Add some content to make the page scrollable -->
+	<div style="height: 1000px"></div>
+
+	<div id="popup">
+		<h2><center>STOCKS</center></h2>
+		<p><center>What is NOT a potential risk of investing in stocks?</center></p>
+		<form>
+			<input type="radio" id="fall" name="risk" value="fall">
+			<label for="fall">Share prices for company potentially falling</label><br>
+			<input type="radio" id="bankrupt" name="risk" value="bankrupt">
+			<label for="bankrupt">You might not get your money back if the company goes bankrupt</label><br>
+			<input type="radio" id="tax" name="risk" value="tax">
+			<label for="tax">Lower tax rates</label><br>
+			<input type="radio" id="dividend" name="risk" value="dividend">
+			<label for="dividend">Your dividend might vary depending on the value of the shares</label><br>
+			<button type="button" onclick="checkAnswer()">Submit</button>
+					<button type="button" onclick="hidePopup()">Close</button>
+		</form>
+		<p id="result"></p>
+	</div>
+
+	<script>
+		// Set up variables
+		var popup = document.getElementById("popup");
+		var result = document.getElementById("result");
+
+		// Function to show the popup
+		function showPopup() {
+			popup.style.display = "block";
+		}
+
+		// Function to hide the popup
+		function hidePopup() {
+			popup.style.display = "none";
+		}
+
+		// Function to check the user's answer
+		function checkAnswer() {
+			var answer = document.querySelector('input[name="risk"]:checked');
+			if (answer && answer.value === "tax") {
+				result.innerHTML = "Correct!";
+			} else {
+				result.innerHTML = "Incorrect. Share prices falling, not getting your money back, or varying dividend values are all potential risks of investing in stocks. Lower tax rates is considered a benefit of investing in stocks";
+			}
+		}
+
+		// Show the popup when the user scrolls down
+		var lastScrollPosition = window.scrollY;
+		window.addEventListener("scroll", function() {
+			var currentScrollPosition = window.scrollY;
+			var scrollDifference = currentScrollPosition - lastScrollPosition;
+			if (scrollDifference > 0 && currentScrollPosition > 500 && currentScrollPosition < 800) {
+				showPopup();
+			} else if (scrollDifference < 0 && currentScrollPosition < 500 || currentScrollPosition > 800 || currentScrollPosition >= document.documentElement.scrollHeight - window.innerHeight) {
+				hidePopup();
+			}
+			lastScrollPosition = currentScrollPosition;
+		});
+	</script>
+</body>
+</html>
