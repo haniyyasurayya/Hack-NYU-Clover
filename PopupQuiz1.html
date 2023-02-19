@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interest Pop-up Quiz 1</title>
+	<style>
+h1 {
+  font-family: "Heebo Light", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 40px 40px; /* Adjust padding as needed */
+  border-radius: 5px;
+  width: auto; /* Set width to adjust dynamically */
+  z-index: 1;
+}
+
+@media only screen and (min-height: 800px) {
+  h1 {
+    bottom: 0;
+    top: auto;
+  }
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #CDD5CA;
+  padding: 20px 40px; /* Adjust padding as needed */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  width: auto; /* Set width to adjust dynamically */
+  z-index: 1;
+  font-family: "Heebo Light", sans-serif;
+  height: 200px; /* Add a fixed height */
+  overflow: auto; /* Make the popup scrollable */
+} 
+		#popup h2 {
+		    margin-bottom: 15px;
+		}
+		#popup p {
+		    margin-bottom: 10px;
+		}
+		#popup label {
+		    margin-top: 5px;
+		    margin-bottom: 10px;
+		}
+		#popup button {
+		    margin-top: 5px;
+		}
+		#button-container {
+		    display: flex;
+		    justify-content: space-between;
+		    flex-direction: row-reverse;
+		}
+	</style>
+  
+</head>
+<body>
+  <h1><center>Scroll to test your knowledge!</center></h1>
+
+	<!-- Add some content to make the page scrollable -->
+	<div style="height: 1000px"></div>
+
+	<div id="popup">
+		<h2><center>INTEREST</center></h2>
+		<p><center>Which of the following would be the best investment decision?</center></p>
+		<form>
+			<input type="radio" id="borrow" name="decision" value="borrow">
+			<label for="borrow">Borrow money that has a high interest rate</label><br>
+			<input type="radio" id="wait" name="decision" value="wait">
+			<label for="wait">Wait ten years before investing so you have more money to invest</label><br>
+			<input type="radio" id="low" name="decision" value="low">
+			<label for="low">Investing in a stock that with a low interest rate</label><br>
+			<input type="radio" id="high" name="decision" value="high">
+			<label for="high">Investing in a stock that has a high interest rate now</label><br>
+			<button type="button" onclick="checkAnswer()">Submit</button>
+					<button type="button" onclick="hidePopup()">Close</button>
+		</form>
+		<p id="result"></p>
+	</div>
+
+	<script>
+		// Set up variables
+		var popup = document.getElementById("popup");
+		var result = document.getElementById("result");
+
+		// Function to show the popup
+		function showPopup() {
+			popup.style.display = "block";
+		}
+
+		// Function to hide the popup
+		function hidePopup() {
+			popup.style.display = "none";
+		}
+
+		// Function to check the user's answer
+		function checkAnswer() {
+			var answer = document.querySelector('input[name="decision"]:checked');
+			if (answer && answer.value === "high") {
+				result.innerHTML = "Correct!";
+			} else {
+				result.innerHTML = "Incorrect. Borrowing money at a high interest rate can generate a lot of debt quickly, forcing you to pay back much more than what you borrowed. Waiting ten years before investing could cause you to lose out on a lot of interest that could have been earned throughout those ten years. Investing in stocks that have low interest rates might be safe, but would not generate as much interest return as a high-interest stock.";
+			}
+		}
+
+		// Show the popup when the user scrolls down
+		var lastScrollPosition = window.scrollY;
+		window.addEventListener("scroll", function() {
+			var currentScrollPosition = window.scrollY;
+			var scrollDifference = currentScrollPosition - lastScrollPosition;
+			if (scrollDifference > 0 && currentScrollPosition > 500 && currentScrollPosition < 800) {
+				showPopup();
+			} else if (scrollDifference < 0 && currentScrollPosition < 500 || currentScrollPosition > 800 || currentScrollPosition >= document.documentElement.scrollHeight - window.innerHeight) {
+				hidePopup();
+			}
+			lastScrollPosition = currentScrollPosition;
+		});
+	</script>
+</body>
+</html> 
